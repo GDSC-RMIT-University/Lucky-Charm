@@ -20,7 +20,7 @@ client.on('guildMemberAdd', member => {
     if (!channel) return;
 
     const welcomeEmbed = new Discord.MessageEmbed()
-        .setTitle(`Well hello there <@${member.user.username}>!`)
+        .setTitle(`Well hello there @${member.user.username}!`)
         .setDescription(`\nWelcome to our funky community \u2728 \u2728 \u2728 \nDo tell us a little bit about yourself and then make sure to hop into <#861451844856184867> and answer the Question of the day!\n
     Oh, and don't forget to checkout our upcoming events here in <#861456370012127242> \n\nHave fun :watermelon:`)
         .setColor("#f1c40f");

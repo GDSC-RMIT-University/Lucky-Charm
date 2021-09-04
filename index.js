@@ -16,11 +16,11 @@ client.once('ready', () => {
 // When a new user enters
 client.on('guildMemberAdd', member => {
 
-    const channel = member.guild.channels.cache.find(channel => channel.name === "introductions")
+    const channel = member.guild.channels.cache.get('861456453046370314')
     if (!channel) return;
 
     const newMemberEmbed = new MessageEmbed()
-    .setTitle(`Well hello there ${member}!`)
+    .setTitle(`Well hello there <@${member.user.id}>!`)
     .setDescription(`\nWelcome to our funky community \u2728 \u2728 \u2728 \nDo tell us a little bit about yourself 
     and then make sure to hop into <#861451844856184867> and answer the Question of the day!\n
     Oh, and don't forget to checkout our upcoming events here in <#861456370012127242> \n\nHave fun :watermelon:`)

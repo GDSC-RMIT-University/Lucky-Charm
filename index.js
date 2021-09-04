@@ -4,7 +4,7 @@ const { token } = require('./config.json');
 
 // Create a new client instance
 const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
-const { MessageEmbed } = require('discord.js');
+const Discord = require('discord.js');
 
 // When the client is ready, run this code (only once)
 client.once('ready', () => {
@@ -16,17 +16,16 @@ client.once('ready', () => {
 // When a new user enters
 client.on('guildMemberAdd', (member) => {
 
-    const channel = member.guild.channels.cache.get('861456453046370314').send()
-    if (!channel) return;
-
-    const newMemberEmbed = new MessageEmbed()
+    const newMemberEmbed = new Discord.MessageEmbed()
     .setTitle(`Well hello there <@${member.user.id}>!`)
     .setDescription(`\nWelcome to our funky community \u2728 \u2728 \u2728 \nDo tell us a little bit about yourself
     and then make sure to hop into <#861451844856184867> and answer the Question of the day!\n
     Oh, and don't forget to checkout our upcoming events here in <#861456370012127242> \n\nHave fun :watermelon:`)
     .setColor("#a806a4")
 
-    channel.send({ embeds: [newMemberEmbed] })
+	const channel = member.guild.channels.cache.get('861456453046370314')
+
+    channel.send(newMemberEmbed)
 });
 
 // Code for the slash commands

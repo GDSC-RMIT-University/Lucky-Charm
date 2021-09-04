@@ -14,14 +14,14 @@ client.once('ready', () => {
 // EVENTS Available: https://gist.github.com/koad/316b265a91d933fd1b62dddfcc3ff584
 
 // When a new user enters
-client.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', (member) => {
 
-    const channel = member.guild.channels.cache.get('861456453046370314')
+    const channel = member.guild.channels.cache.get('861456453046370314').send()
     if (!channel) return;
 
     const newMemberEmbed = new MessageEmbed()
     .setTitle(`Well hello there <@${member.user.id}>!`)
-    .setDescription(`\nWelcome to our funky community \u2728 \u2728 \u2728 \nDo tell us a little bit about yourself 
+    .setDescription(`\nWelcome to our funky community \u2728 \u2728 \u2728 \nDo tell us a little bit about yourself
     and then make sure to hop into <#861451844856184867> and answer the Question of the day!\n
     Oh, and don't forget to checkout our upcoming events here in <#861456370012127242> \n\nHave fun :watermelon:`)
     .setColor("#a806a4")

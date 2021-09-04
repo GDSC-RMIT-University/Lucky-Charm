@@ -6,3 +6,5 @@ Oh, and make sure to try out their built-in slash commands too :>
 ![](image.png)
 
 P.S When Aster feels particularly lucky, they go by the name Lucky Charm ✨
+
+Image by Chaamudi Kodikara and Isaac Chuah Yi Jie.

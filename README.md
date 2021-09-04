@@ -7,7 +7,9 @@ Oh, and make sure to try out their built-in slash commands too :>
 
 P.S When Aster feels particularly lucky, they go by the name Lucky Charm ✨
 
-Image by Chaamudi Kodikara and Isaac Chuah Yi Jie.
+Image by the fabulously talented Isaac Chuah Yi Jie.
+Concept design by the ever creative Chaamudi Kodikara.
+
 
 ### Set up
 

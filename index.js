@@ -1,6 +1,6 @@
 // Require the necessary discord.js classes
 const {Client, Intents} = require('discord.js');
-const {token} = require('./config.json');
+const {token, guildId} = require('./config.json');
 
 // Create a new client instance
 const client = new Client({intents: [Intents.FLAGS.GUILDS, 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES',
@@ -33,6 +33,9 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
+    var guild = client.guilds.cache.get(guildId);
+    role = guild.roles.cache.find(r => r.name === "@everyone");
+
     if(message.content.includes('god')){
         message.channel.send('You called, boo? :wink:');
     } else if (message.content.includes('omg')){
@@ -49,6 +52,9 @@ client.on('message', message => {
         message.channel.send('Somebody called me?');
     } else if ( message.mentions.has(client.user)){
         message.channel.send('what?');
+    // Change the sentence and link with every new event
+    } else if (message.content.includes('what\'s new?')){
+        message.channel.send(`RSVP soon ${role.name} or else . . . \nhttps://gdsc.community.dev/e/mppex6/`);
     }
 });
 

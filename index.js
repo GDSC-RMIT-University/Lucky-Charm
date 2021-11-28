@@ -1,10 +1,17 @@
 // Require the necessary discord.js classes
 const {Client, Intents} = require('discord.js');
 const {token, guildId} = require('./config.json');
+// Link to games: https://opensourcelibs.com/lib/djs-games
+const {TicTacToe} = require('djs-games');
+const {ConnectFour} = require('djs-games');
+const {SnakeGame} = require('djs-games');
+
 
 // Create a new client instance
-const client = new Client({intents: [Intents.FLAGS.GUILDS, 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES',
-        'DIRECT_MESSAGES', Intents.FLAGS.GUILD_MESSAGES]});
+const client = new Client({
+    intents: [Intents.FLAGS.GUILDS, 'GUILD_PRESENCES', 'GUILD_MEMBERS', 'GUILD_MESSAGES',
+        'DIRECT_MESSAGES', Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS]
+});
 const Discord = require('discord.js');
 
 // When the client is ready, run this code (only once)
@@ -36,24 +43,24 @@ client.on('message', message => {
     var guild = client.guilds.cache.get(guildId);
     role = guild.roles.cache.find(r => r.name === "@everyone");
 
-    if(message.content.includes('god')){
+    if (message.content.includes('god')) {
         message.channel.send('You called, boo? :wink:');
-    } else if (message.content.includes('omg')){
+    } else if (message.content.includes('omg')) {
         message.channel.send('Hmm? :wink:');
-    } else if (message.content.includes('sad')){
+    } else if (message.content.includes('sad')) {
         message.channel.send('You okay, boo?');
-    } else if (message.content.includes('assignment')){
+    } else if (message.content.includes('assignment')) {
         message.channel.send('AARRRGGGGHHHHHHHHHHHH ASSIGNMENTS!!!!!!!!!');
-    } else if (message.content.includes('cool')){
+    } else if (message.content.includes('cool')) {
         message.channel.send('BRRRRRRRRRR :cold_face:');
-    } else if (message.content.includes('lol')){
+    } else if (message.content.includes('lol')) {
         message.channel.send(':joy: :joy: :joy:');
-    } else if ( message.content === '<@!861458316734627860>' | message.content === '@420733235778158603'){
+    } else if (message.content === '<@!861458316734627860>' | message.content === '@420733235778158603') {
         message.channel.send('Somebody called me?');
-    } else if ( message.mentions.has(client.user)){
+    } else if (message.mentions.has(client.user)) {
         message.channel.send('what?');
-    // Change the sentence and link with every new event
-    } else if (message.content.includes('what\'s new?')){
+        // Change the sentence and link with every new event
+    } else if (message.content.includes('what\'s new?')) {
         message.channel.send(`RSVP soon ${role.name} or else . . . \nhttps://gdsc.community.dev/e/mppex6/`);
     }
 });
@@ -78,10 +85,80 @@ client.on('interactionCreate', async interaction => {
         await interaction.reply(`Check out our newest events here: https://gdsc.community.dev/rmit-university-melbourne/`);
     } else if (commandName === 'help') {
         await interaction.reply(`Oi, ${role} get your butt over here and help this soul!`);
+    } else if (commandName === 'games') {
+
+        const pickGame = new Discord.MessageEmbed()
+            .setTitle("Pick a game")
+            .setDescription(`\n❌ Tic Tac Toe\n\n🟡 Connect Four\n\nP.S Only the player who made the slash command needs to react to pick the game!`)
+            .setColor("#c27c0e");
+
+        const message = await interaction.reply({
+            embeds: [pickGame],
+            content: 'Looks like you\'re up for a challenge today! Which game would you like to play?\n',
+            fetchReply: true
+        })
+
+        await message.react('❌');
+        await message.react('🟡');
+
+        const filter = (reaction, user) => {
+            return !user.bot
+        }
+
+        const collector = message.createReactionCollector({filter, max: 1, time: 1000 * 100000});
+
+        collector.on('collect', async (reaction) => {
+
+            const replyMessage = await message.reply('To play, tag your opponent!');
+
+            const filterReplyMessage = (message) => {
+                return !message.author.bot
+            }
+
+            const replyCollector = replyMessage.channel.createMessageCollector({
+                filterReplyMessage,
+                max: 1,
+                time: 1000 * 100000
+            });
+
+            replyCollector.on('collect', (newMessage) => {
+
+                if (newMessage.mentions.users.first() && newMessage.mentions.users.first() !== newMessage.author) {
+
+                    if (reaction.emoji.name === '❌') {
+
+                        const opponent = newMessage.mentions.users.first();
+
+                        const game = new TicTacToe({
+                            message: newMessage,
+                            opponent: opponent,
+                            xEmoji: '❌', // The Emote for X
+                            oEmoji: '⭕', // The Emote for O
+                            xColor: 'PRIMARY',
+                            oColor: 'PRIMARY', // The Color for O
+                            embedDescription: 'GAME ON!',
+                        })
+                        game.start()
+                    } else if (reaction.emoji.name === '🟡') {
+                        const game = new ConnectFour({
+                            message: newMessage,
+                            player1: '🔴',
+                            player2: '🟡',
+                        })
+                        game.start()
+                    } else {
+                        message.reply('You need to react properly.');
+                    }
+                } else if (newMessage.mentions.users.first() && newMessage.mentions.users.first() === newMessage.author) {
+                    newMessage.channel.send('Oi, you can\'t pick yourself!!!!!! Restart the whoole thing again . . .');
+                } else {
+                    newMessage.channel.send('You\'ve gotta TAG someone, my friend. Restart the whoole thing again . . .');
+                }
+            });
+        });
     } else if (commandName === 'best') {
         await interaction.reply(`You of course, ${interaction.user.username} :kissing_heart:`);
     }
-
 });
 
 // Login to Discord with your client's token

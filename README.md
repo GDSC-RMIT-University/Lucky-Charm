@@ -1,7 +1,7 @@
 # Lucky Charm the bot 
 
-A cute lil discord bot created to welcome newcomers to our GDSC - RMIT University discord server!
-Oh, and make sure to try out their built-in slash commands too :>
+A not so cute, sassy lil discord bot created to welcome newcomers and make life 'interesting' to the members in our GDSC - RMIT University discord server!
+Oh, and make sure to try out their built-in slash commands to get a taste of Lucky Charm's audacity :>
 
 ![](image.png)
 

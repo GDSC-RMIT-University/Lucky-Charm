@@ -7,13 +7,12 @@ Oh, and make sure to try out their built-in slash commands to get a taste of Luc
 
 P.S When Aster feels particularly lucky, they go by the name Lucky Charm ✨
 
-Image by the fabulously talented Isaac Chuah Yi Jie.
-Concept design by the ever creative Chaamudi Kodikara.
 
 ### Main Features
-1. Respond with snarky comments to GDSC Members' messages;
-2. Fun, creative and helpful (in the sassiest manner ofc!) slash commands to get information, play around and cure boredom;
-3. Games like connect four and tic tac toe to play with discord friends;
+1. Give a warm welcome to our new members joining our GDSC RMIT community;
+2. Respond with snarky comments to GDSC Members' messages;
+3. Fun, creative and helpful (in the sassiest manner ofc!) slash commands to get information, play around and cure boredom;
+4. Games like connect four and tic tac toe to play with discord friends;
 
 ### Set up
 
@@ -38,4 +37,9 @@ Concept design by the ever creative Chaamudi Kodikara.
     forever start index.js
    ```
 
+### Contributors
+Code by the fiery [Milindi Kodikara](https://github.com/Milindi-Kodikara);
 
+Image by the fabulously talented [Isaac Chuah Yi Jie](https://github.com/perrywink);
+
+Concept design by the ever creative [Chaamudi Kodikara](https://github.com/ChaamudiK);
